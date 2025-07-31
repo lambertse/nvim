@@ -9,7 +9,7 @@ keymap.set("n", "-", "<C-x>")
 keymap.set("n", "dw", 'vb"_d')
 
 -- Rename with LSP support
-keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename symbol' })
+keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {desc = 'Rename symbol'})
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
@@ -45,8 +45,8 @@ keymap.set("n", "<Leader>ce", ":Copilot enable<CR>", opts)
 keymap.set("n", "<Leader>cd", ":Copilot disable<CR>", opts)
 
 -- Resize window
-keymap.set("n", "<C-w><left>", "<C-w><")
-keymap.set("n", "<C-w><right>", "<C-w>>")
+keymap.set("n", "<C-w><left>", "<C-w>>")
+keymap.set("n", "<C-w><right>", "<C-w><")
 keymap.set("n", "<C-w><up>", "<C-w>+")
 keymap.set("n", "<C-w><down>", "<C-w>-")
 
