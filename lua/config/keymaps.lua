@@ -84,10 +84,10 @@ keymap.set("n", "<space>fo", builtin.oldfiles, {})
 keymap.set("n", "<space>fb", builtin.current_buffer_fuzzy_find, {})
 keymap.set("n", "<C-f>", "/", {})
 
--- Begin: Portal jumplist manager
-keymap.set("n", "<M-Left>", "<cmd>Portal jumplist backward<cr>")
-keymap.set("n", "<M-Right>", "<cmd>Portal jumplist forward<cr>")
--- End: Portal
+-- Begin: Jumplist 
+keymap.set("n", "<M-Left>", "<Cmd>bprevious<CR>")
+keymap.set("n", "<M-Right>", "<Cmd>bnext<CR>")
+-- End: Jumplist
 
 keymap.set("n", "<space>en",
            function() builtin.find_files({cwd = vim.fn.stdpath("config")}) end)
