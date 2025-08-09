@@ -109,8 +109,10 @@ keymap.set("n", "<space>en",
 -- GITHUB COPILOT
 -- ========================================================================================
 
-keymap.set("n", "<Leader>ct", ":CopilotChatToggle<CR>", opts)
-keymap.set("n", "<Leader>cd", ":CopilotChatReset<CR>", opts)
+keymap.set("n", "<Leader>cct", ":CopilotChatToggle<CR>", opts)
+keymap.set("n", "<Leader>ccr", ":CopilotChatReset<CR>", opts)
+keymap.set("n", "<Leader>cd", ":Copilot disable<CR>", opts)
+keymap.set("n", "<Leader>ce", ":Copilot enable<CR>", opts)
 
 -- ========================================================================================
 -- CUSTOM LINE OPERATIONS
