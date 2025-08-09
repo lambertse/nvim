@@ -1,93 +1,136 @@
 local keymap = vim.keymap
 local opts = {noremap = true, silent = true}
 
--- Increment/decrement
-keymap.set("n", "+", "<C-a>")
-keymap.set("n", "-", "<C-x>")
+-- ========================================================================================
+-- BASIC EDITING
+-- ========================================================================================
 
--- Delete a word backwards
-keymap.set("n", "dw", 'vb"_d')
+-- Increment/decrement numbers
+keymap.set("n", "+", "<C-a>", opts)
+keymap.set("n", "-", "<C-x>", opts)
 
--- Rename with LSP support
-keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {desc = 'Rename symbol'})
+-- Delete operations (send to black hole register to preserve clipboard)
+keymap.set("n", "dw", '"_diw', opts)
+keymap.set({"n", "v"}, "d", '"_d', opts)
+keymap.set({"n", "v"}, "D", '"_D', opts)
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
+keymap.set("n", "<C-a>", "gg<S-v>G", opts)
 
--- p Save with root permission (not working for now)
-vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
+-- ========================================================================================
+-- CLIPBOARD OPERATIONS
+-- ====================================/====================================================
 
--- Disable continuations
-keymap.set("n", "<Leader>o", "o<Esc>^Da", opts)
-keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
+-- Copy to system clipboard with Ctrl+C
+keymap.set({"n", "v"}, "cc", '"+y', opts)
 
--- Jumplist
-keymap.set("n", "<C-m>", "<C-i>", opts)
+-- Paste from system clipboard with Ctrl+V
+keymap.set("n", "cv", '"+P', opts)
+keymap.set("v", "cv", '"_dP', opts)
+-- Cut operations
+keymap.set("v", "<C-x>", '"+d', opts) -- Cut selected text to system clipboard
+keymap.set("n", "<C-x>", '"+dd', opts) -- Cut current line to system clipboard
 
--- New tab
-keymap.set("n", "te", ":tabedit")
+-- Use 'p' in visual mode to paste without overwriting the default register
+
+-- ========================================================================================
+-- UNDO/REDO
+-- ========================================================================================
+
+keymap.set("n", "<C-z>", "u", opts) -- Normal mode: undo
+keymap.set("i", "<C-z>", "<C-o>u", opts) -- Insert mode: undo
+keymap.set("v", "<C-z>", "<Esc>u", opts) -- Visual mode: exit and undo
+
+-- ========================================================================================
+-- LSP OPERATIONS
+-- ========================================================================================
+
+-- Rename symbol with LSP support
+keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {desc = "Rename symbol"})
+
+-- ========================================================================================
+-- TABS AND BUFFERS
+-- ========================================================================================
+
+-- Tab operations
+keymap.set("n", "te", ":tabedit", opts)
 keymap.set("n", "<tab>", ":tabnext<Return>", opts)
 keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
--- Split window
+
+-- Buffer navigation
+keymap.set("n", "<M-Left>", "<Cmd>bprevious<CR>", opts)
+keymap.set("n", "<M-Right>", "<Cmd>bnext<CR>", opts)
+
+-- ========================================================================================
+-- WINDOW MANAGEMENT
+-- ========================================================================================
+
+-- Split windows
 keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
--- Move window
 
-keymap.set("n", "s<left>", "<C-w>h")
-keymap.set("n", "s<up>", "<C-w>k")
-keymap.set("n", "s<down>", "<C-w>j")
-keymap.set("n", "s<right>", "<C-w>l")
-keymap.set("n", "sw", ":q<CR>")
+-- Move between windows
+keymap.set("n", "s<left>", "<C-w>h", opts)
+keymap.set("n", "s<up>", "<C-w>k", opts)
+keymap.set("n", "s<down>", "<C-w>j", opts)
+keymap.set("n", "s<right>", "<C-w>l", opts)
+keymap.set("n", "sw", ":q<CR>", opts)
 
--- Copilot keymap
+-- Resize windows
+keymap.set("n", "<C-w><left>", "<C-w>>", opts)
+keymap.set("n", "<C-w><right>", "<C-w><", opts)
+keymap.set("n", "<C-w><up>", "<C-w>+", opts)
+keymap.set("n", "<C-w><down>", "<C-w>-", opts)
+
+-- ========================================================================================
+-- TELESCOPE (FILE FINDER)
+-- ========================================================================================
+
+local builtin = require('telescope.builtin')
+
+-- Main telescope commands
+keymap.set("n", "<space>fz", ":Telescope<CR>", opts)
+keymap.set("n", "<C-t>", builtin.find_files, opts)
+keymap.set("n", "<space>fl", builtin.live_grep, opts)
+keymap.set("n", "<space>ff", builtin.buffers, opts)
+keymap.set("n", "<space>fo", builtin.oldfiles, opts)
+keymap.set("n", "<space>fb", builtin.current_buffer_fuzzy_find, opts)
+keymap.set("n", "<space>fh", builtin.help_tags, opts)
+
+-- Quick search
+keymap.set("n", "<C-f>", "/", opts)
+
+-- Edit Neovim config
+keymap.set("n", "<space>en",
+           function() builtin.find_files({cwd = vim.fn.stdpath("config")}) end,
+           opts)
+
+-- ========================================================================================
+-- GITHUB COPILOT
+-- ========================================================================================
+
 keymap.set("n", "<Leader>cc", ":Copilot<CR>", opts)
 keymap.set("n", "<Leader>ce", ":Copilot enable<CR>", opts)
 keymap.set("n", "<Leader>cd", ":Copilot disable<CR>", opts)
 
--- Resize window
-keymap.set("n", "<C-w><left>", "<C-w>>")
-keymap.set("n", "<C-w><right>", "<C-w><")
-keymap.set("n", "<C-w><up>", "<C-w>+")
-keymap.set("n", "<C-w><down>", "<C-w>-")
+-- ========================================================================================
+-- CUSTOM LINE OPERATIONS
+-- ========================================================================================
 
--- ----------------------------------------------------------------------------------------
--- Custom continuations
+-- Disable automatic comment continuation
+keymap.set("n", "<Leader>o", "o<Esc>^Da", opts)
+keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
 
--- Copy to system clipboard
-keymap.set("v", "<C-c>", '"+y') -- Copy selected text
-keymap.set("n", "<C-c>", '"+yy') -- Copy current line
+-- ========================================================================================
+-- NAVIGATION
+-- ========================================================================================
 
--- Paste from system clipboard
-keymap.set("n", "<C-v>", '"+p') -- Paste in normal mode
-keymap.set("v", "<C-v>", '"+p') -- Paste in visual mode
-keymap.set("i", "<C-v>", '<C-r>+') -- Paste in insert mode
+-- Jumplist navigation
+keymap.set("n", "<C-m>", "<C-i>", opts)
 
--- Cut to system clipboard
-keymap.set("v", "<C-x>", '"+d') -- Cut selected text
-keymap.set("n", "<C-x>", '"+dd') -- Cut current line
+-- ========================================================================================
+-- SYSTEM COMMANDS
+-- ========================================================================================
 
--- Redo
-keymap.set("i", "<C-z>", "<C-o>u", opts) -- Insert mode: Use <C-o> to temporarily switch to normal mode and undo
-keymap.set("v", "<C-z>", "<Esc>u", opts) -- Visual mode: Exit visual mode and undo
-keymap.set("n", "<C-z>", "u", opts) -- Normal mode: Just undo
-
--- Telescope
--- t
-local builtin = require('telescope.builtin')
-
-keymap.set("n", "<space>fz", ":Telescope<Esc>", opts)
-keymap.set("n", "<space>fh", builtin.help_tags, {})
-keymap.set("n", "<C-t>", builtin.find_files, {})
-keymap.set("n", "<space>fl", builtin.live_grep, {})
-keymap.set("n", "<space>ff", builtin.buffers, {})
-keymap.set("n", "<space>fo", builtin.oldfiles, {})
-keymap.set("n", "<space>fb", builtin.current_buffer_fuzzy_find, {})
-keymap.set("n", "<C-f>", "/", {})
-
--- Begin: Jumplist 
-keymap.set("n", "<M-Left>", "<Cmd>bprevious<CR>")
-keymap.set("n", "<M-Right>", "<Cmd>bnext<CR>")
--- End: Jumplist
-
-keymap.set("n", "<space>en",
-           function() builtin.find_files({cwd = vim.fn.stdpath("config")}) end)
+-- Save with root permission (requires sudo)
+vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
