@@ -122,7 +122,7 @@ return {
                 numhl = ''
             })
             vim.fn.sign_define('DapStopped', {
-                text = '➡️',
+                text = '▶',
                 texthl = 'DapStopped',
                 linehl = 'DapStoppedLine',
                 numhl = ''
