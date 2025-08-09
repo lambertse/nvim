@@ -57,10 +57,6 @@ keymap.set("n", "te", ":tabedit", opts)
 keymap.set("n", "<tab>", ":tabnext<Return>", opts)
 keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 
--- Buffer navigation
-keymap.set("n", "<M-Left>", "<Cmd>bprevious<CR>", opts)
-keymap.set("n", "<M-Right>", "<Cmd>bnext<CR>", opts)
-
 -- ========================================================================================
 -- WINDOW MANAGEMENT
 -- ========================================================================================
@@ -81,6 +77,10 @@ keymap.set("n", "<C-w><left>", "<C-w>>", opts)
 keymap.set("n", "<C-w><right>", "<C-w><", opts)
 keymap.set("n", "<C-w><up>", "<C-w>+", opts)
 keymap.set("n", "<C-w><down>", "<C-w>-", opts)
+
+--- Buffer navigation
+keymap.set("n", "<M-Left>", "<C-o>", opts)
+keymap.set("n", "<M-Right>", "<C-i>", opts)
 
 -- ========================================================================================
 -- TELESCOPE (FILE FINDER)
