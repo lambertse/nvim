@@ -5,7 +5,7 @@ return {
         lazy = false,
         priority = 1000,
 
-        config = function(_, opts)
+        config = function()
             local notify = require("notify")
             notify.setup({
                 background_colour = "NotifyBackground",

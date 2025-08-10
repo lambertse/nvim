@@ -132,6 +132,6 @@ keymap.set("n", "<C-m>", "<C-i>", opts)
 -- ========================================================================================
 -- SYSTEM COMMANDS
 -- ========================================================================================
-
+keymap.set("n", "<Leader>T", ":Neotree toggle<CR>", opts)
 -- Save with root permission (requires sudo)
 vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
