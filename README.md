@@ -18,6 +18,7 @@
 
 ## Plugin Configurations (`lua/plugins/`)
 - `lsp.lua` - Language Server Protocol setup
+  + requires: `clangd`
 - `treesitter.lua` - Syntax highlighting and parsing
 - `telescope.lua` - Fuzzy finder
 - `dap.lua` - Debug Adapter Protocol
@@ -29,7 +30,8 @@
 - `mini-diff.lua` - Diff visualization
 - `cmake-tools.lua` - CMake integration
 - `comment.lua` - Comment utilities
-- `render-markdown.lua` - Markdown rendering
+- `markdown-preview.lua` - Markdown rendering
+  + require: `node`, `yarn`,
 - `hlslens.lua` - Search highlighting
 - `scrollbar.lua` - Scrollbar enhancements
 - `dash-board.lua` - Dashboard/start screen
