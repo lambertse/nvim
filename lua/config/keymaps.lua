@@ -79,8 +79,8 @@ keymap.set("n", "<C-w><up>", "<C-w>+", opts)
 keymap.set("n", "<C-w><down>", "<C-w>-", opts)
 
 --- Buffer navigation
-keymap.set("n", "<M-Left>", "<C-o>", opts)
-keymap.set("n", "<M-Right>", "<C-i>", opts)
+keymap.set("n", "<C-Left>", "<C-o>", opts)
+keymap.set("n", "<C-Right>", "<C-S-i>", opts)
 
 -- ========================================================================================
 -- TELESCOPE (FILE FINDER)
@@ -125,9 +125,6 @@ keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
 -- ========================================================================================
 -- NAVIGATION
 -- ========================================================================================
-
--- Jumplist navigation
-keymap.set("n", "<C-m>", "<C-i>", opts)
 
 -- ========================================================================================
 -- SYSTEM COMMANDS
