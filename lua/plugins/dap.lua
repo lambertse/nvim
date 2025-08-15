@@ -33,11 +33,18 @@ return {
             --     end
             -- }
 
-            -- Additional manual GDB configuration (if you prefer pure GDB alongside mason configs)
+            -- Additional manual adapters configuration
             dap.adapters.gdb = {
                 type = "executable",
                 command = "gdb",
                 args = {"-i", "dap"}
+            }
+
+            -- LLDB-DAP adapter configuration
+            dap.adapters.lldb = {
+                type = "executable",
+                command = "/opt/homebrew/opt/llvm/bin/lldb-dap", -- Use absolute path
+                name = "lldb"
             }
 
             -- Manual GDB configurations (will be added to existing mason configurations)
@@ -69,12 +76,43 @@ return {
                 }
             }
 
-            -- Add manual GDB configs to existing mason configurations for C++
+            -- LLDB-DAP configurations
+            local lldb_configs = {
+                {
+                    name = "Launch (LLDB)",
+                    type = "lldb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input('Path to executable: ',
+                                            vim.fn.getcwd() .. '/', 'file')
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
+                    args = {},
+                    runInTerminal = false,
+                },
+                {
+                    name = "Attach to process (LLDB)",
+                    type = "lldb",
+                    request = "attach",
+                    pid = function()
+                        local name = vim.fn.input('Executable name (filter): ')
+                        return require("dap.utils").pick_process({filter = name})
+                    end,
+                    args = {},
+                }
+            }
+
+            -- Combine all configurations and add to existing mason configurations for C++
             vim.defer_fn(function()
+                local all_configs = {}
+                vim.list_extend(all_configs, gdb_configs)
+                vim.list_extend(all_configs, lldb_configs)
+                
                 if dap.configurations.cpp then
-                    vim.list_extend(dap.configurations.cpp, gdb_configs)
+                    vim.list_extend(dap.configurations.cpp, all_configs)
                 else
-                    dap.configurations.cpp = gdb_configs
+                    dap.configurations.cpp = all_configs
                 end
 
                 -- Ensure C uses the same configurations
