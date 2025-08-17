@@ -9,7 +9,14 @@ return {
         lazy = false, -- neo-tree will lazily load itself
         config = function()
             require('neo-tree').setup({
-                filesystem = {filtered_items = {hide_dotfiles = false}}
+                filesystem = {
+                    filtered_items = {
+                        hide_dotfiles = false
+                    },
+                    follow_current_file = {
+                        enabled = true,
+                    }
+                }
             })
         end
 
