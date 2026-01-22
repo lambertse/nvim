@@ -1,6 +1,8 @@
 -- Line Number Configuration Options
 local opt = vim.opt
+local gb = vim.g
 
+gb.autoformat = false
 -- === LINE NUMBER SETTINGS ===
 
 -- Basic line number display
@@ -95,7 +97,7 @@ opt.gdefault = true -- Use 'g' flag by default in substitutions
 
 -- === COMPLETION ===
 
-opt.completeopt = {"menu", "menuone", "noselect"}
+opt.completeopt = { "menu", "menuone", "noselect" }
 opt.pumheight = 10 -- Maximum height of popup menu
 opt.pumwidth = 15 -- Minimum width of popup menu
 

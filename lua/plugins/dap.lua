@@ -47,6 +47,18 @@ return {
                 name = "lldb"
             }
 
+            -- Helper function to parse args string into table
+            local function parse_args(args_string)
+                if not args_string or args_string == "" then
+                    return {}
+                end
+                local args = {}
+                for arg in string.gmatch(args_string, "%S+") do
+                    table.insert(args, arg)
+                end
+                return args
+            end
+
             -- Manual GDB configurations (will be added to existing mason configurations)
             local gdb_configs = {
                 {
@@ -59,7 +71,23 @@ return {
                     end,
                     cwd = "${workspaceFolder}",
                     stopAtBeginningOfMainSubprogram = false
-                }, {
+                },
+                {
+                    name = "Launch with Args (Pure GDB)",
+                    type = "gdb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input('Path to executable: ',
+                                            vim.fn.getcwd() .. '/', 'file')
+                    end,
+                    args = function()
+                        local args_string = vim.fn.input('Program arguments: ')
+                        return parse_args(args_string)
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopAtBeginningOfMainSubprogram = false
+                },
+                {
                     name = "Attach to process (Pure GDB)",
                     type = "gdb",
                     request = "attach",
@@ -77,10 +105,30 @@ return {
             }
 
             -- LLDB-DAP configurations
+-- LLDB-DAP adapter configuration (define this ONCE, before the configurations)
+            dap.adapters.lldb = {
+                type = "executable",
+                command = "/Applications/Xcode.app/Contents/Developer/usr/bin/lldb-dap", 
+                name = "lldb"
+            }
+
+            -- Helper function to parse args string into table
+            local function parse_args(args_string)
+                if not args_string or args_string == "" then
+                    return {}
+                end
+                local args = {}
+                for arg in string.gmatch(args_string, "%S+") do
+                    table.insert(args, arg)
+                end
+                return args
+            end
+
+            -- LLDB-DAP configurations (these reference the adapter above)
             local lldb_configs = {
                 {
                     name = "Launch (LLDB)",
-                    type = "lldb",
+                    type = "lldb",  -- This refers to the adapter name defined above
                     request = "launch",
                     program = function()
                         return vim.fn.input('Path to executable: ',
@@ -90,10 +138,40 @@ return {
                     stopOnEntry = false,
                     args = {},
                     runInTerminal = false,
+                    initCommands = {
+                        'settings set target.process.stop-on-exec false',
+                        'settings set target.x86-disassembly-flavor intel',
+                    },
+                    preRunCommands = {
+                        'settings set target.process.optimization-warnings false',
+                    },
+                },
+                {
+                    name = "Launch with Args (LLDB)",
+                    type = "lldb",  -- Add this line
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input('Path to executable: ',
+                                            vim.fn.getcwd() .. '/', 'file')
+                    end,
+                    args = function()
+                        local args_string = vim.fn.input('Program arguments: ')
+                        return parse_args(args_string)
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
+                    runInTerminal = false,
+                    initCommands = {
+                        'settings set target.process.stop-on-exec false',
+                        'settings set target.x86-disassembly-flavor intel',
+                    },
+                    preRunCommands = {
+                        'settings set target.process.optimization-warnings false',
+                    },
                 },
                 {
                     name = "Attach to process (LLDB)",
-                    type = "lldb",
+                    type = "lldb",  -- Add this line
                     request = "attach",
                     pid = function()
                         local name = vim.fn.input('Executable name (filter): ')
@@ -101,7 +179,7 @@ return {
                     end,
                     args = {},
                 }
-            }
+            }    
 
             -- Combine all configurations and add to existing mason configurations for C++
             vim.defer_fn(function()
@@ -118,6 +196,21 @@ return {
                 -- Ensure C uses the same configurations
                 dap.configurations.c = dap.configurations.cpp
             end, 100) -- Small delay to ensure mason configs are loaded first
+
+            
+            vim.defer_fn(function()
+                local all_configs = {}
+                vim.list_extend(all_configs, gdb_configs)
+                vim.list_extend(all_configs, lldb_configs)
+                
+                if dap.configurations.swift then
+                    vim.list_extend(dap.configurations.swift, all_configs)
+                else
+                    dap.configurations.swift = all_configs
+                end
+
+            end, 100) -- Small delay to ensure mason configs are loaded first
+
 
             -- Elixir configuration (preserved from your original)
             local elixir_ls_debugger = vim.fn.exepath "elixir-ls-debugger"
@@ -186,9 +279,9 @@ return {
                            {desc = "Debug: Toggle Breakpoint"})
             vim.keymap.set("n", "<F10>", dap.step_over,
                            {desc = "Debug: Step Over"})
-            vim.keymap.set("n", "<F11>", dap.step_into,
+            vim.keymap.set("n", "<F3>", dap.step_into,
                            {desc = "Debug: Step Into"})
-            vim.keymap.set("n", "<S-F11>", dap.step_out,
+            vim.keymap.set("n", "<F4>", dap.step_out,
                            {desc = "Debug: Step Out"}) -- Shift+F11
 
             -- Additional useful VS-style keymaps

@@ -23,10 +23,10 @@ keymap.set("n", "<C-a>", "gg<S-v>G", opts)
 
 -- Copy to system clipboard with Ctrl+C
 keymap.set({"n", "v"}, "cc", '"+y', opts)
-
 -- Paste from system clipboard with Ctrl+V
 keymap.set("n", "cv", '"+P', opts)
 keymap.set("v", "cv", '"_dP', opts)
+
 -- Cut operations
 keymap.set("v", "<C-x>", '"+d', opts) -- Cut selected text to system clipboard
 keymap.set("n", "<C-x>", '"+dd', opts) -- Cut current line to system clipboard
@@ -79,9 +79,8 @@ keymap.set("n", "<C-w><up>", "<C-w>+", opts)
 keymap.set("n", "<C-w><down>", "<C-w>-", opts)
 
 --- Buffer navigation
-keymap.set("n", "<C-Left>", "<C-o>", opts)
-keymap.set("n", "<C-Right>", "<C-S-i>", opts)
-
+keymap.set("n", "<D-Left>", "<C-o>", opts)
+keymap.set("n", "<D-Right>", "<C-S-i>", opts)
 -- ========================================================================================
 -- TELESCOPE (FILE FINDER)
 -- ========================================================================================
@@ -92,14 +91,14 @@ local builtin = require('telescope.builtin')
 keymap.set("n", "<space>fz", ":Telescope<CR>", opts)
 keymap.set("n", "<C-t>", builtin.find_files, opts)
 keymap.set("n", "<space>fl", builtin.live_grep, opts)
+keymap.set("n", "<D-F>", builtin.live_grep, opts)
 keymap.set("n", "<space>ff", builtin.buffers, opts)
 keymap.set("n", "<space>fo", builtin.oldfiles, opts)
 keymap.set("n", "<space>fb", builtin.current_buffer_fuzzy_find, opts)
 keymap.set("n", "<space>fh", builtin.help_tags, opts)
 
 -- Quick search
-keymap.set("n", "<C-f>", "/", opts)
-
+keymap.set("n", "<C-f>", ":FzfLua blines<CR>", opts)
 -- Edit Neovim config
 keymap.set("n", "<space>en",
            function() builtin.find_files({cwd = vim.fn.stdpath("config")}) end,
