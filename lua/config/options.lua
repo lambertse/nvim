@@ -123,3 +123,8 @@ opt.clipboard = "unnamedplus" -- Use system clipboard
 
 opt.termguicolors = true -- Enable 24-bit RGB colors
 opt.title = true -- Set terminal title
+
+-- === TAB config ===
+vim.opt.tabstop = 2 -- Number of spaces that a <Tab> counts for 
+vim.opt.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent 
+vim.opt.expandtab = true -- Use spaces instead of tabs

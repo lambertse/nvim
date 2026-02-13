@@ -4,10 +4,10 @@ return {
     config = function()
         local lint = require("lint")
 
-        -- Configure linters per filetype
-        lint.linters_by_ft = {
-            cpp = {"clangtidy", "cppcheck"} -- or "cppcheck"
-        }
+        -- -- Configure linters per filetype
+        -- lint.linters_by_ft = {
+        --     cpp = {"clangtidy", "cppcheck"} -- or "cppcheck"
+        -- }
 
         -- Auto-run lint on save or text change
         vim.api.nvim_create_autocmd({
