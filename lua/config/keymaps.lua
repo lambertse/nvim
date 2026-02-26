@@ -9,8 +9,9 @@ local opts = { noremap = true, silent = true }
 keymap.set("n", "+", "<C-a>", opts)
 keymap.set("n", "-", "<C-x>", opts)
 
--- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G", opts)
+-- Select all 
+keymap.set("n", "<leader>a", "gg<S-v>G", opts)
+keymap.set("n", "gg", "gg0", opts)
 
 -- ========================================================================================
 -- DELETE OPERATIONS (send to black hole register to preserve clipboard)
@@ -62,8 +63,8 @@ keymap.set("n", "<leader>cF", ":ConformFormat<CR>", opts)
 -- ========================================================================================
 
 keymap.set("n", "te", ":tabedit", opts)
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
+-- keymap.set("n", "<tab>", ":tabnext<Return>", opts)
+-- keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 
 -- ========================================================================================
 -- WINDOW OPERATIONS
@@ -101,7 +102,7 @@ local builtin = require("telescope.builtin")
 -- Main telescope commands
 keymap.set("n", "<space>fz", ":Telescope<CR>", opts)
 keymap.set("n", "<space>ft", builtin.find_files, opts)
-keymap.set("n", "<space>fg", builtin.live_grep, opts)
+keymap.set("n", "<space>fl", builtin.live_grep, opts)
 keymap.set("n", "<space>ff", builtin.buffers, opts)
 keymap.set("n", "<space>fo", builtin.oldfiles, opts)
 keymap.set("n", "<space>fb", builtin.current_buffer_fuzzy_find, opts)

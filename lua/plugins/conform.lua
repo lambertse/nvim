@@ -19,12 +19,13 @@ return {
                 jsonc = { "prettier" },
                 yaml = { "prettier" },
                 markdown = { "prettier" },
-                graphql = { "prettier" },},
+                graphql = { "prettier" }
+            },
             formatters = {
                 ["clang-format"] = {
-                    command = "clang-format",
-                    args = {"--style=Google"}
+                  prepend_args = { "-style=Google" },
                 },
+
                 ["lua-format"] = {command = "lua-format"},
             }
         }
