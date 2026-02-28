@@ -122,8 +122,8 @@ end, opts)
 
 keymap.set("n", "<Leader>cct", ":CopilotChatToggle<CR>", opts)
 keymap.set("n", "<Leader>ccr", ":CopilotChatReset<CR>", opts)
-keymap.set("n", "<Leader>cd", ":Copilot disable<CR>", opts)
-keymap.set("n", "<Leader>ce", ":Copilot enable<CR>", opts)
+keymap.set("n", "<Leader>ccd", ":Copilot disable<CR>", opts)
+keymap.set("n", "<Leader>cce", ":Copilot enable<CR>", opts)
 
 -- ========================================================================================
 -- FILE EXPLORER
