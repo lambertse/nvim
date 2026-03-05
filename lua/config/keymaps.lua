@@ -91,9 +91,8 @@ keymap.set("n", "<C-w>j", ":resize -2<CR>", opts)
 -- LSP OPERATIONS
 -- ========================================================================================
 
-keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
-
--- ========================================================================================
+keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+keymap.set("n", "<leader>zd", vim.lsp.buf.definition, opts, "Go to definition")
 -- TELESCOPE (FUZZY FINDER)
 -- ========================================================================================
 
@@ -124,6 +123,7 @@ keymap.set("n", "<Leader>cct", ":CopilotChatToggle<CR>", opts)
 keymap.set("n", "<Leader>ccr", ":CopilotChatReset<CR>", opts)
 keymap.set("n", "<Leader>ccd", ":Copilot disable<CR>", opts)
 keymap.set("n", "<Leader>cce", ":Copilot enable<CR>", opts)
+keymap.set("n", "<Leader>ccs", ":Copilot status<CR>", opts)
 
 -- ========================================================================================
 -- FILE EXPLORER
