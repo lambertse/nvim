@@ -1,4 +1,8 @@
 local keymap = vim.keymap
+
+local Util = require("lazyvim.util")
+local Snacks = require("snacks")
+
 local opts = { noremap = true, silent = true }
 
 -- ========================================================================================
@@ -87,7 +91,13 @@ keymap.set("n", "<C-w>l", ":vertical resize -5<CR>", opts)
 keymap.set("n", "<C-w>k", ":resize +2<CR>", opts)
 keymap.set("n", "<C-w>j", ":resize -2<CR>", opts)
 
--- ========================================================================================
+-- <leader>tr -> Terminal (Root Dir)
+keymap.set({ "n", "t" }, "<leader>tr", 
+  function()
+    Snacks.terminal(nil, { cwd = Util.root.get() })
+  end,
+opts, { desc = "Terminal (Root Dir)" })
+
 -- LSP OPERATIONS
 -- ========================================================================================
 
@@ -150,6 +160,6 @@ keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
 keymap.set({"n", "v"}, "z[", "[z", opts)
 keymap.set({"n", "v"}, "z]", "]z", opts)
 
-
+keymap.set({"n", "v"}, "<Leader>pr", ":Lazy reload nvim-pomodoro<CR>")
 -- Save with root permission (requires sudo)
 vim.api.nvim_create_user_command("W", "w !sudo tee > /dev/null %", {})
