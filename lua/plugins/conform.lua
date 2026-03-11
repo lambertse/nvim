@@ -4,7 +4,7 @@ return {
         local opts = {
             formatters_by_ft = {
                 cpp = {"clang-format"}, 
-                lua = {"lua-format"}, 
+                lua = {"stylua"}, 
                 c = {"clang-format"},  
                 javascript = { "prettier" },
                 typescript = { "prettier" },

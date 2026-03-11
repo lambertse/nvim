@@ -9,6 +9,15 @@ local opts = { noremap = true, silent = true }
 -- BASIC EDITING
 -- ========================================================================================
 
+-- Delete terminal with 'Ctr + l' 
+local term_clear = function()
+  vim.fn.feedkeys("", 'n')
+  local sb = vim.bo.scrollback
+  vim.bo.scrollback = 1
+  vim.bo.scrollback = sb
+end
+keymap.set('t', '<C-l>', term_clear)
+
 -- Increment/decrement numbers
 keymap.set("n", "+", "<C-a>", opts)
 keymap.set("n", "-", "<C-x>", opts)
@@ -26,6 +35,7 @@ keymap.set({ "n", "v" }, "d", '"_d', opts)
 keymap.set({ "n", "v" }, "D", '"_D', opts)
 -- Set jj for switch to normal mode in insert mode
 keymap.set("i", "jj", "<Esc>", opts)
+keymap.set("t", "jj", "<c-\\><c-n>")
 
 -- ========================================================================================
 -- CLIPBOARD OPERATIONS
@@ -92,11 +102,7 @@ keymap.set("n", "<C-w>k", ":resize +2<CR>", opts)
 keymap.set("n", "<C-w>j", ":resize -2<CR>", opts)
 
 -- <leader>tr -> Terminal (Root Dir)
-keymap.set({ "n", "t" }, "<leader>tr", 
-  function()
-    Snacks.terminal(nil, { cwd = Util.root.get() })
-  end,
-opts, { desc = "Terminal (Root Dir)" })
+keymap.set({ "n", "t" }, "<leader>tr", ":Floaterminal<CR>", { desc = "FLoating Terminal" })
 
 -- LSP OPERATIONS
 -- ========================================================================================
