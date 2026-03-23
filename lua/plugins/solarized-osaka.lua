@@ -4,6 +4,14 @@ return {
   priority = 1000,
   opts = {},
   config = function()
-    vim.cmd[[colorscheme solarized-osaka]]
-  end
+    require("solarized-osaka").setup({
+      on_highlights = function(hl, colors)
+        hl.Visual = {
+          bg = colors.cyan700,
+          fg = colors.none,
+        }
+      end,
+    })
+    vim.cmd([[colorscheme solarized-osaka]])
+  end,
 }
