@@ -7,7 +7,7 @@ return {
     require("solarized-osaka").setup({
       on_highlights = function(hl, colors)
         hl.Visual = {
-          bg = colors.cyan700,
+          bg = colors.yellow100,
           fg = colors.none,
         }
       end,
