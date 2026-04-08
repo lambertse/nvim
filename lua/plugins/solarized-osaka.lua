@@ -262,6 +262,37 @@ return {
         hl.lualine_a_insert = { bg = "#98C379", fg = dark_bg, bold = true }
         hl.lualine_a_visual = { bg = "#C678DD", fg = dark_bg, bold = true }
         hl.lualine_a_command = { bg = "#D4A843", fg = dark_bg, bold = true }
+
+        -- ── Neo-tree ───────────────────────────────────
+        hl.NeoTreeNormal = { bg = dark_bg, fg = cream }
+        hl.NeoTreeNormalNC = { bg = dark_bg, fg = cream }
+        hl.NeoTreeEndOfBuffer = { bg = dark_bg, fg = dark_bg }
+        hl.NeoTreeWinSeparator = { fg = warm_border, bg = dark_bg }
+        hl.NeoTreeRootName = { fg = claude_orange, bold = true, italic = true }
+        hl.NeoTreeDirectoryName = { fg = cream }
+        hl.NeoTreeDirectoryIcon = { fg = claude_orange }
+        hl.NeoTreeFileName = { fg = muted_tan }
+        hl.NeoTreeFileIcon = { fg = muted_tan }
+        hl.NeoTreeGitAdded = { fg = "#98C379" }
+        hl.NeoTreeGitModified = { fg = claude_bright }
+        hl.NeoTreeGitDeleted = { fg = "#E06C75" }
+        hl.NeoTreeGitConflict = { fg = "#E06C75", bold = true }
+        hl.NeoTreeGitUntracked = { fg = "#D4A843" }
+        hl.NeoTreeGitIgnored = { fg = "#4a4540" }
+        hl.NeoTreeGitStaged = { fg = "#98C379" }
+        hl.NeoTreeIndentMarker = { fg = "#2a2520" }
+        hl.NeoTreeExpander = { fg = "#6a6560" }
+        hl.NeoTreeCursorLine = { bg = "#242019" }
+        hl.NeoTreeTitleBar = { bg = claude_orange, fg = dark_bg, bold = true }
+        hl.NeoTreeFloatBorder = { fg = claude_orange, bg = dark_bg }
+        hl.NeoTreeFloatTitle = { fg = claude_orange, bg = dark_bg, bold = true }
+        hl.NeoTreeDotfile = { fg = "#4a4540" }
+        hl.NeoTreeSymbolicLinkTarget = { fg = "#56B6C2" }
+        hl.NeoTreeFilterTerm = { fg = claude_orange, bold = true }
+        hl.NeoTreeTabActive = { bg = dark_bg, fg = claude_orange, bold = true }
+        hl.NeoTreeTabInactive = { bg = "#161411", fg = "#4a4540" }
+        hl.NeoTreeTabSeparatorActive = { fg = claude_orange, bg = dark_bg }
+        hl.NeoTreeTabSeparatorInactive = { fg = "#161411", bg = "#161411" }
       end,
     })
     vim.cmd([[colorscheme solarized-osaka]])

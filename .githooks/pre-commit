@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo "Running StyLua formatter..."
+
+stylua .
+
+RET=$?
+if [ $RET -ne 0 ]; then
+  echo "StyLua failed. Commit aborted."
+  exit 1
+fi
+
+git add .

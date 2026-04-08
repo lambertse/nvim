@@ -41,8 +41,10 @@ local config = {
     "-javaagent:" .. home .. "/.local/share/nvim/mason/share/jdtls/lombok.jar",
     "-Xmx4g",
     "--add-modules=ALL-SYSTEM",
-    "--add-opens", "java.base/java.util=ALL-UNNAMED",
-    "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+    "--add-opens",
+    "java.base/java.util=ALL-UNNAMED",
+    "--add-opens",
+    "java.base/java.lang=ALL-UNNAMED",
 
     -- Eclipse jdtls location
     "-jar",

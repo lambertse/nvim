@@ -3,22 +3,22 @@ return {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
     dependencies = {
-      'nvim-lua/plenary.nvim',
+      "nvim-lua/plenary.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = 'make',
-      }
+        build = "make",
+      },
     },
     config = function()
-      require('telescope').setup {
+      require("telescope").setup({
         pickers = {
           find_files = {
             theme = "ivy",
             hide_gitignore = false,
             hidden = true,
           },
-        }
-      }
-    end
-  }
+        },
+      })
+    end,
+  },
 }

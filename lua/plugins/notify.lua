@@ -1,35 +1,36 @@
 -- lua/plugins/notify.lua
 return {
-    {"folke/noice.nvim", opts = {notify = {enabled = false}}}, {
-        "rcarriga/nvim-notify",
-        lazy = false,
-        priority = 1000,
+  { "folke/noice.nvim", opts = { notify = { enabled = false } } },
+  {
+    "rcarriga/nvim-notify",
+    lazy = false,
+    priority = 1000,
 
-        config = function()
-            local notify = require("notify")
-            notify.setup({
-                background_colour = "NotifyBackground",
-                fps = 60,
-                icons = {
-                    DEBUG = "",
-                    ERROR = "",
-                    INFO = "",
-                    TRACE = "✎",
-                    WARN = ""
-                },
-                level = 2,
-                minimum_width = 50,
-                render = "default",
-                stages = "slide",
-                time_formats = {
-                    notification = "%T",
-                    notification_history = "%FT%T"
-                },
-                timeout = 5000,
-                top_down = true
-            })
-            vim.notify = notify
-            vim.cmd([[
+    config = function()
+      local notify = require("notify")
+      notify.setup({
+        background_colour = "NotifyBackground",
+        fps = 60,
+        icons = {
+          DEBUG = "",
+          ERROR = "",
+          INFO = "",
+          TRACE = "✎",
+          WARN = "",
+        },
+        level = 2,
+        minimum_width = 50,
+        render = "default",
+        stages = "slide",
+        time_formats = {
+          notification = "%T",
+          notification_history = "%FT%T",
+        },
+        timeout = 5000,
+        top_down = true,
+      })
+      vim.notify = notify
+      vim.cmd([[
                 highlight NotifyERRORBorder guifg=#8A1F1F
                 highlight NotifyWARNBorder guifg=#79491D
                 highlight NotifyINFOBorder guifg=#4F6752
@@ -51,8 +52,6 @@ return {
                 highlight link NotifyDEBUGBody Normal
                 highlight link NotifyTRACEBody Normal 
             ]])
-
-        end
-    }
+    end,
+  },
 }
-

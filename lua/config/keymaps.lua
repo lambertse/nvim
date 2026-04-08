@@ -9,20 +9,20 @@ local opts = { noremap = true, silent = true }
 -- BASIC EDITING
 -- ========================================================================================
 
--- Delete terminal with 'Ctr + l' 
+-- Delete terminal with 'Ctr + l'
 local term_clear = function()
-  vim.fn.feedkeys("", 'n')
+  vim.fn.feedkeys("", "n")
   local sb = vim.bo.scrollback
   vim.bo.scrollback = 1
   vim.bo.scrollback = sb
 end
-keymap.set('t', '<C-l>', term_clear)
+keymap.set("t", "<C-l>", term_clear)
 
 -- Increment/decrement numbers
 keymap.set("n", "+", "<C-a>", opts)
 keymap.set("n", "-", "<C-x>", opts)
 
--- Select all 
+-- Select all
 keymap.set("n", "<leader>a", "gg<S-v>G", opts)
 keymap.set("n", "gg", "gg0", opts)
 
@@ -70,7 +70,6 @@ keymap.set("n", "<leader>bf", "<C-i>", opts) -- Go forward
 keymap.set("n", "<C-s>", ":w<CR>", opts) -- Save buffer
 -- Calling conform plugin to format current file
 keymap.set("n", "<leader>cF", ":ConformFormat<CR>", opts)
-
 
 -- ========================================================================================
 -- TAB OPERATIONS
@@ -125,7 +124,7 @@ keymap.set("n", "<C-f>", ":FzfLua blines<CR>", opts)
 
 -- Edit Neovim config
 keymap.set("n", "<space>en", function()
-	builtin.find_files({ cwd = vim.fn.stdpath("config") })
+  builtin.find_files({ cwd = vim.fn.stdpath("config") })
 end, opts)
 
 -- ========================================================================================
@@ -157,12 +156,12 @@ keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
 -- ========================================================================================
 
 -- ========================================================================================
--- FOLDING 
+-- FOLDING
 -- ========================================================================================
 
-keymap.set({"n", "v"}, "z[", "[z", opts)
-keymap.set({"n", "v"}, "z]", "]z", opts)
+keymap.set({ "n", "v" }, "z[", "[z", opts)
+keymap.set({ "n", "v" }, "z]", "]z", opts)
 
-keymap.set({"n", "v"}, "<Leader>pr", ":Lazy reload pomodoro<CR>")
+keymap.set({ "n", "v" }, "<Leader>pr", ":Lazy reload pomodoro<CR>")
 -- Save with root permission (requires sudo)
 vim.api.nvim_create_user_command("W", "w !sudo tee > /dev/null %", {})

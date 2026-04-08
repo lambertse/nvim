@@ -1,1 +1,1 @@
-return {"nvim-mini/mini.diff"}
+return { "nvim-mini/mini.diff" }

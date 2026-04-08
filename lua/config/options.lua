@@ -41,12 +41,12 @@ opt.laststatus = 3 -- Global statusline (2 = always show, 3 = global)
 -- Whitespace and special characters
 opt.list = false -- Don't show invisible characters by default
 opt.listchars = { -- Define how to show invisible chars when 'list' is on
-    tab = "→ ",
-    trail = "·",
-    extends = "»",
-    precedes = "«",
-    nbsp = "⦸",
-    eol = "↴"
+  tab = "→ ",
+  trail = "·",
+  extends = "»",
+  precedes = "«",
+  nbsp = "⦸",
+  eol = "↴",
 }
 
 -- Search highlighting (affects line number visibility during search)
@@ -125,6 +125,6 @@ opt.termguicolors = true -- Enable 24-bit RGB colors
 opt.title = true -- Set terminal title
 
 -- === TAB config ===
-vim.opt.tabstop = 2 -- Number of spaces that a <Tab> counts for 
-vim.opt.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent 
+vim.opt.tabstop = 2 -- Number of spaces that a <Tab> counts for
+vim.opt.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Use spaces instead of tabs
