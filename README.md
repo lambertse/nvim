@@ -1,3 +1,9 @@
+## Overview
+
+![Dashboard](assets/dashboard.png)
+
+![Theme](assets/theme.png)
+
 ## Configuration Files
 - `.neoconf.json` - Neoconf configuration
 - `stylua.toml` - Lua formatter configuration  
