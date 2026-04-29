@@ -7,6 +7,7 @@ return {
         "rust",
         "c",
         "go",
+        "java",
         "lua",
         "python",
         "bash",

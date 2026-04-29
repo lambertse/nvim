@@ -31,6 +31,9 @@ return {
         },
       })
 
+      -- NOTE: jdtls is configured via nvim-jdtls in ftplugin/java.lua,
+      -- not via lspconfig, to avoid duplicate clients.
+
       -- JavaScript / TypeScript
       lspconfig.ts_ls.setup({
         capabilities = capabilities,

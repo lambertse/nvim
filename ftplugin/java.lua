@@ -1,9 +1,21 @@
 -- JDTLS (Java LSP) configuration
 local home = vim.env.HOME -- Get the home directory
 
-local jdtls = require("jdtls")
+local ok_jdtls, jdtls = pcall(require, "jdtls")
+if not ok_jdtls then
+  vim.notify("nvim-jdtls not found; skipping Java LSP setup", vim.log.levels.WARN)
+  return
+end
+
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = home .. "/jdtls-workspace/" .. project_name
+
+-- Auto-completion capabilities (cmp_nvim_lsp if available, else default)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if ok_cmp then
+  capabilities = cmp_nvim_lsp.default_capabilities()
+end
 
 local system_os = ""
 
@@ -129,7 +141,7 @@ local config = {
     },
   },
   -- Needed for auto-completion with method signatures and placeholders
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  capabilities = capabilities,
   flags = {
     allow_incremental_sync = true,
   },
