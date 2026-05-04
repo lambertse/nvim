@@ -1,5 +1,13 @@
-return {
-  dir = "/Users/tri.le/src/opensource/lambertse/nvim-plugins/pomodoro",
+local local_dir = "/Users/tri.le/src/opensource/lambertse/nvim-plugins/pomodoro"
+
+local plugin_source
+if vim.loop.fs_stat(local_dir) then
+  plugin_source = { dir = local_dir }
+else
+  plugin_source = { "lambertse/nvim-pomodoro" }
+end
+
+return vim.tbl_extend("force", plugin_source, {
   config = function()
     require("nvim-pomodoro").setup({
       focus_time = 50,
@@ -20,4 +28,4 @@ return {
       },
     })
   end,
-}
+})
