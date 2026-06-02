@@ -103,11 +103,11 @@ return {
 
       -- LLDB-DAP configurations
       -- LLDB-DAP adapter configuration (define this ONCE, before the configurations)
-      dap.adapters.lldb = {
-        type = "executable",
-        command = "/Applications/Xcode.app/Contents/Developer/usr/bin/lldb-dap",
-        name = "lldb",
-      }
+      -- dap.adapters.lldb = {
+      --   type = "executable",
+      --   command = "/Applications/Xcode.app/Contents/Developer/usr/bin/lldb-dap",
+      --   name = "lldb",
+      -- }
 
       -- Helper function to parse args string into table
       local function parse_args(args_string)
