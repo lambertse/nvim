@@ -5,26 +5,28 @@ return {
   opts = {},
   config = function()
     require("solarized-osaka").setup({
-      transparent = false,
+      transparent = true,
       styles = {
         comments = { italic = true },
         keywords = { italic = true },
         functions = {},
         variables = {},
-        sidebars = "dark",
-        floats = "dark",
+        sidebars = "transparent",
+        floats = "transparent",
       },
 
       -- Override base palette to match Claude Code's warm dark aesthetic
       on_colors = function(colors)
         -- Claude Code backgrounds (warm dark browns instead of cold solarized blue)
-        colors.bg = "#1a1815"
-        colors.bg_dark = "#141210"
         colors.bg_highlight = "#242019"
-        colors.bg_float = "#141210"
         colors.bg_popup = "#141210"
-        colors.bg_sidebar = "#141210"
-        colors.bg_statusline = "#1e1b17"
+        colors.bg_float = "#141210"
+        -- Transparent
+        colors.bg = colors.none
+        colors.bg_dark = colors.none
+        colors.bg_float = colors.none
+        colors.bg_sidebar = colors.none
+        colors.bg_statusline = colors.none
 
         -- Claude Code foreground (warm cream tones)
         colors.fg = "#e8e6e3"
@@ -97,9 +99,9 @@ return {
         local muted_tan = "#c4a584"
 
         -- ── Editor chrome ──────────────────────────────
-        hl.Normal = { bg = warm_bg, fg = cream }
-        hl.NormalFloat = { bg = dark_bg, fg = cream }
-        hl.NormalSB = { bg = dark_bg, fg = cream }
+        hl.Normal = { bg = "NONE", fg = cream }
+        hl.NormalFloat = { bg = "NONE", fg = cream }
+        hl.NormalSB = { bg = "NONE", fg = cream }
         hl.FloatBorder = { fg = claude_orange, bg = dark_bg }
         hl.FloatTitle = { fg = claude_orange, bg = dark_bg, bold = true }
         hl.WinSeparator = { fg = warm_border }
@@ -118,7 +120,8 @@ return {
 
         -- ── Line numbers & signs ───────────────────────
         hl.LineNr = { fg = "#4a4540" }
-        hl.SignColumn = { bg = warm_bg }
+        hl.SignColumn = { bg = "NONE" }
+        hl.EndOfBuffer = { bg = "NONE" }
 
         -- ── Pmenu (completion) ─────────────────────────
         hl.Pmenu = { bg = dark_bg, fg = cream }
@@ -127,8 +130,8 @@ return {
         hl.PmenuThumb = { bg = claude_orange }
 
         -- ── Statusline ─────────────────────────────────
-        hl.StatusLine = { bg = "#1e1b17", fg = muted_tan }
-        hl.StatusLineNC = { bg = "#161411", fg = "#4a4540" }
+        hl.StatusLine = { bg = "NONE", fg = muted_tan }
+        hl.StatusLineNC = { bg = "NONE", fg = "#4a4540" }
 
         -- ── Tabline ────────────────────────────────────
         hl.TabLine = { bg = dark_bg, fg = muted_tan }
@@ -138,10 +141,10 @@ return {
         -- ── Telescope ──────────────────────────────────
         local telescope_bg = dark_bg
         local prompt_bg = "#201d18"
-        hl.TelescopeNormal = { bg = telescope_bg, fg = cream }
-        hl.TelescopeBorder = { bg = telescope_bg, fg = claude_orange }
-        hl.TelescopePromptNormal = { bg = prompt_bg, fg = cream }
-        hl.TelescopePromptBorder = { bg = prompt_bg, fg = claude_orange }
+        hl.TelescopeNormal = { bg = "NONE", fg = cream }
+        hl.TelescopeBorder = { bg = "NONE", fg = claude_orange }
+        hl.TelescopePromptNormal = { bg = "NONE", fg = cream }
+        hl.TelescopePromptBorder = { bg = "NONE", fg = claude_orange }
         hl.TelescopePromptTitle = { bg = claude_orange, fg = dark_bg, bold = true }
         hl.TelescopePreviewTitle = { bg = claude_orange, fg = dark_bg, bold = true }
         hl.TelescopeResultsTitle = { bg = claude_orange, fg = dark_bg, bold = true }
@@ -264,9 +267,9 @@ return {
         hl.lualine_a_command = { bg = "#D4A843", fg = dark_bg, bold = true }
 
         -- ── Neo-tree ───────────────────────────────────
-        hl.NeoTreeNormal = { bg = dark_bg, fg = cream }
-        hl.NeoTreeNormalNC = { bg = dark_bg, fg = cream }
-        hl.NeoTreeEndOfBuffer = { bg = dark_bg, fg = dark_bg }
+        hl.NeoTreeNormal = { bg = "NONE", fg = cream }
+        hl.NeoTreeNormalNC = { bg = "NONE", fg = cream }
+        hl.NeoTreeEndOfBuffer = { bg = "NONE", fg = cream }
         hl.NeoTreeWinSeparator = { fg = warm_border, bg = dark_bg }
         hl.NeoTreeRootName = { fg = claude_orange, bold = true, italic = true }
         hl.NeoTreeDirectoryName = { fg = cream }
