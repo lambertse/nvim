@@ -67,7 +67,7 @@ keymap.set("v", "<C-z>", "<Esc>u", opts)
 -- Buffer navigation
 keymap.set("n", "<leader>bb", "<C-o>", opts) -- Go back
 keymap.set("n", "<leader>bf", "<C-i>", opts) -- Go forward
-keymap.set("n", "<C-s>", ":w<CR>", opts) -- Save buffer
+keymap.set("n", "<C-s>", ":w!<CR>", opts) -- Save buffer
 -- Calling conform plugin to format current file
 keymap.set("n", "<leader>cF", ":ConformFormat<CR>", opts)
 

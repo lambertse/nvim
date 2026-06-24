@@ -10,7 +10,15 @@ return {
     lazy = false, -- neo-tree will lazily load itself
     config = function()
       require("neo-tree").setup({
-        filesystem = { filtered_items = { hide_dotfiles = false } },
+        filesystem = {
+          filtered_items = { hide_dotfiles = false },
+          window = {
+            mappings = {
+              ["O"] = "expand_all_subnodes", -- open all child folders under cursor
+              ["Z"] = "expand_all_nodes",
+            },
+          },
+        },
       })
       vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left<CR>", {})
     end,
