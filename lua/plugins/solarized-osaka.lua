@@ -104,22 +104,23 @@ return {
         hl.NormalSB = { bg = "NONE", fg = cream }
         hl.FloatBorder = { fg = claude_orange, bg = dark_bg }
         hl.FloatTitle = { fg = claude_orange, bg = dark_bg, bold = true }
-        hl.WinSeparator = { fg = warm_border }
-        hl.VertSplit = { fg = warm_border }
+        hl.NeoTreeWinSeparator = { fg = "#6b6154", bg = "NONE" }
+        hl.WinSeparator = { fg = "#6b6154", bg = "NONE" }
+        hl.VertSplit = { fg = "#6b6154", bg = "NONE" }
 
         -- ── Cursor & visual ────────────────────────────
-        hl.CursorLine = { bg = "#242019" }
+        hl.CursorLine = { bg = "#33281f" }
         hl.CursorLineNr = { fg = claude_orange, bold = true }
-        hl.Visual = { bg = "#3a2820" }
-        hl.VisualNOS = { bg = "#3a2820" }
+        hl.Visual = { bg = "#5c3a22" }
+        hl.VisualNOS = { bg = "#5c3a22" }
 
         -- ── Search ─────────────────────────────────────
-        hl.Search = { bg = "#3a2a20", fg = colors.none }
+        hl.Search = { bg = "#4a3520", fg = cream }
         hl.IncSearch = { bg = claude_orange, fg = "#1a1815" }
         hl.CurSearch = { bg = claude_bright, fg = "#1a1815" }
 
         -- ── Line numbers & signs ───────────────────────
-        hl.LineNr = { fg = "#4a4540" }
+        hl.LineNr = { fg = "#6a635c" }
         hl.SignColumn = { bg = "NONE" }
         hl.EndOfBuffer = { bg = "NONE" }
 
@@ -134,9 +135,26 @@ return {
         hl.StatusLineNC = { bg = "NONE", fg = "#4a4540" }
 
         -- ── Tabline ────────────────────────────────────
-        hl.TabLine = { bg = dark_bg, fg = muted_tan }
-        hl.TabLineFill = { bg = dark_bg }
-        hl.TabLineSel = { bg = warm_bg, fg = claude_orange, bold = true }
+        hl.TabLine = { bg = "NONE", fg = muted_tan }
+        hl.TabLineFill = { bg = "NONE" }
+        hl.TabLineSel = { bg = "NONE", fg = claude_orange, bold = true }
+
+        -- ── Bufferline ─────────────────────────────────
+        hl.BufferLineFill = { bg = "NONE" }
+        hl.BufferLineBackground = { bg = "NONE", fg = "#8a8073" }
+        hl.BufferLineBufferVisible = { bg = "NONE", fg = muted_tan }
+        hl.BufferLineBufferSelected = { bg = "NONE", fg = claude_orange, bold = true, italic = true }
+        hl.BufferLineSeparator = { bg = "NONE", fg = warm_border }
+        hl.BufferLineSeparatorVisible = { bg = "NONE", fg = warm_border }
+        hl.BufferLineSeparatorSelected = { bg = "NONE", fg = claude_orange }
+        hl.BufferLineIndicatorSelected = { bg = "NONE", fg = claude_orange }
+        hl.BufferLineOffsetSeparator = { bg = "NONE", fg = warm_border }
+        hl.BufferLineCloseButton = { bg = "NONE", fg = "#8a8073" }
+        hl.BufferLineCloseButtonVisible = { bg = "NONE", fg = muted_tan }
+        hl.BufferLineCloseButtonSelected = { bg = "NONE", fg = claude_orange }
+        hl.BufferLineModified = { bg = "NONE", fg = claude_bright }
+        hl.BufferLineModifiedVisible = { bg = "NONE", fg = claude_bright }
+        hl.BufferLineModifiedSelected = { bg = "NONE", fg = claude_bright }
 
         -- ── Telescope ──────────────────────────────────
         local telescope_bg = dark_bg
@@ -182,7 +200,7 @@ return {
         hl["@constant"] = { fg = "#D4A843" }
         hl["@constant.builtin"] = { fg = "#D4A843", italic = true }
 
-        hl["@comment"] = { fg = "#6a6560", italic = true }
+        hl["@comment"] = { fg = "#8a8073", italic = true }
         hl["@punctuation"] = { fg = "#8a8580" }
         hl["@punctuation.bracket"] = { fg = "#8a8580" }
         hl["@punctuation.delimiter"] = { fg = "#8a8580" }
@@ -208,8 +226,8 @@ return {
         hl.LspReferenceWrite = { bg = "#302418" }
 
         -- ── Indent & whitespace ────────────────────────
-        hl.IndentBlanklineChar = { fg = "#2a2520" }
-        hl.IblIndent = { fg = "#2a2520" }
+        hl.IndentBlanklineChar = { fg = "#3a352e" }
+        hl.IblIndent = { fg = "#3a352e" }
         hl.IblScope = { fg = claude_orange }
 
         -- ── Git signs ──────────────────────────────────
@@ -270,7 +288,6 @@ return {
         hl.NeoTreeNormal = { bg = "NONE", fg = cream }
         hl.NeoTreeNormalNC = { bg = "NONE", fg = cream }
         hl.NeoTreeEndOfBuffer = { bg = "NONE", fg = cream }
-        hl.NeoTreeWinSeparator = { fg = warm_border, bg = dark_bg }
         hl.NeoTreeRootName = { fg = claude_orange, bold = true, italic = true }
         hl.NeoTreeDirectoryName = { fg = cream }
         hl.NeoTreeDirectoryIcon = { fg = claude_orange }
@@ -281,21 +298,24 @@ return {
         hl.NeoTreeGitDeleted = { fg = "#E06C75" }
         hl.NeoTreeGitConflict = { fg = "#E06C75", bold = true }
         hl.NeoTreeGitUntracked = { fg = "#D4A843" }
-        hl.NeoTreeGitIgnored = { fg = "#4a4540" }
+        hl.NeoTreeGitIgnored = { fg = "#8a8073" }
         hl.NeoTreeGitStaged = { fg = "#98C379" }
         hl.NeoTreeIndentMarker = { fg = "#2a2520" }
         hl.NeoTreeExpander = { fg = "#6a6560" }
-        hl.NeoTreeCursorLine = { bg = "#242019" }
+        hl.NeoTreeCursorLine = { bg = "#3d2e22", bold = true }
         hl.NeoTreeTitleBar = { bg = claude_orange, fg = dark_bg, bold = true }
         hl.NeoTreeFloatBorder = { fg = claude_orange, bg = dark_bg }
         hl.NeoTreeFloatTitle = { fg = claude_orange, bg = dark_bg, bold = true }
-        hl.NeoTreeDotfile = { fg = "#4a4540" }
+        hl.NeoTreeDotfile = { fg = "#9b9083" }
+        hl.NeoTreeHiddenByName = { fg = "#9b9083" }
+        hl.NeoTreeDimText = { fg = "#8a8073" }
+        hl.NeoTreeMessage = { fg = "#8a8073", italic = true }
         hl.NeoTreeSymbolicLinkTarget = { fg = "#56B6C2" }
         hl.NeoTreeFilterTerm = { fg = claude_orange, bold = true }
-        hl.NeoTreeTabActive = { bg = dark_bg, fg = claude_orange, bold = true }
-        hl.NeoTreeTabInactive = { bg = "#161411", fg = "#4a4540" }
-        hl.NeoTreeTabSeparatorActive = { fg = claude_orange, bg = dark_bg }
-        hl.NeoTreeTabSeparatorInactive = { fg = "#161411", bg = "#161411" }
+        hl.NeoTreeTabActive = { bg = "NONE", fg = claude_orange, bold = true }
+        hl.NeoTreeTabInactive = { bg = "NONE", fg = "#8a8073" }
+        hl.NeoTreeTabSeparatorActive = { fg = claude_orange, bg = "NONE" }
+        hl.NeoTreeTabSeparatorInactive = { fg = warm_border, bg = "NONE" }
       end,
     })
     vim.cmd([[colorscheme solarized-osaka]])

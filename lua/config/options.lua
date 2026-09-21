@@ -123,6 +123,15 @@ opt.clipboard = "unnamedplus" -- Use system clipboard
 
 opt.termguicolors = true -- Enable 24-bit RGB colors
 opt.title = true -- Set terminal title
+opt.fillchars:append({
+  vert = "│",
+  horiz = "─",
+  horizup = "┴",
+  horizdown = "┬",
+  vertleft = "┤",
+  vertright = "├",
+  verthoriz = "┼",
+})
 
 -- === TAB config ===
 vim.opt.tabstop = 2 -- Number of spaces that a <Tab> counts for
