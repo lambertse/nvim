@@ -163,5 +163,10 @@ keymap.set({ "n", "v" }, "z[", "[z", opts)
 keymap.set({ "n", "v" }, "z]", "]z", opts)
 
 keymap.set({ "n", "v" }, "<Leader>pr", ":Lazy reload pomodoro<CR>")
+keymap.set("x", "<leader>rn", function()
+  local w = vim.fn.expand("<cword>")
+  return ":s/\\<" .. w .. "\\>/" .. w .. "/g" .. string.rep("<Left>", 2)
+end, { expr = true, desc = "Substitute word under cursor in selection" })
+
 -- Save with root permission (requires sudo)
 vim.api.nvim_create_user_command("W", "w !sudo tee > /dev/null %", {})
