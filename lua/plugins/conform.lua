@@ -6,6 +6,7 @@ return {
         cpp = { "clang-format" },
         lua = { "stylua" },
         c = { "clang-format" },
+        objc = { "clang-format" },
         java = { "google-java-format" },
         javascript = { "prettier" },
         typescript = { "prettier" },
