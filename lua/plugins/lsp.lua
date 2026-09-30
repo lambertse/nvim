@@ -8,10 +8,44 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.offsetEncoding = { "utf-16" }
 
-      -- C/C++
+      -- C / C++ / Objective-C / Objective-C++
+      -- On macOS, prefer Apple's clangd from Xcode: it understands the
+      -- iOS/macOS SDKs, frameworks and Objective-C best. Fall back to PATH.
+      local clangd_bin = "clangd"
+      if vim.fn.has("mac") == 1 then
+        local xcode_clangd = vim.fn.trim(vim.fn.system({ "xcrun", "--find", "clangd" }))
+        if vim.v.shell_error == 0 and vim.fn.executable(xcode_clangd) == 1 then
+          clangd_bin = xcode_clangd
+        end
+      end
+
       lspconfig.clangd.setup({
-        cmd = { "clangd", "--compile-commands-dir=./build" },
+        -- No --compile-commands-dir: clangd searches every parent directory
+        -- (and its build/ subfolder) for compile_commands.json, so both
+        -- CMake projects (./build) and Xcode projects (repo root) work.
+        cmd = {
+          clangd_bin,
+          "--background-index",
+          "--header-insertion=never",
+          "--completion-style=detailed",
+        },
+        filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+        root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".clangd", ".git"),
         capabilities = capabilities,
+      })
+
+      -- Treat .h files inside Xcode projects as Objective-C instead of C/C++
+      vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+        group = vim.api.nvim_create_augroup("ObjcHeaderFiletype", { clear = true }),
+        pattern = "*.h",
+        callback = function(args)
+          local in_xcode_project = vim.fs.root(args.buf, function(name)
+            return name:match("%.xcodeproj$") ~= nil or name:match("%.xcworkspace$") ~= nil
+          end)
+          if in_xcode_project then
+            vim.bo[args.buf].filetype = "objc"
+          end
+        end,
       })
 
       -- Rust
